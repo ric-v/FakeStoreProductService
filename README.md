@@ -33,6 +33,8 @@ The application will start on `http://localhost:8080`.
 
 ## API Endpoints
 
+[Postman Collection](https://documenter.getpostman.com/view/12893975/2sAYBPnEsg)
+
 ### Get Product by ID
 
 - **URL:** `/products/{id}`

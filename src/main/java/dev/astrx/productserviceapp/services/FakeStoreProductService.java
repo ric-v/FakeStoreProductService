@@ -14,16 +14,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Service class for interacting with the FakeStore API to fetch and update product details.
+ */
 @Service
 public class FakeStoreProductService implements ProductService {
 
     RestTemplate restTemplate;
 
-    // This service class interacts with the FakeStore API to fetch product details.
+    /**
+     * Constructs a new FakeStoreProductService with the given RestTemplate.
+     *
+     * @param restTemplate the RestTemplate to use for API requests
+     */
     public FakeStoreProductService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
+    /**
+     * Retrieves a product by its ID from the FakeStore API.
+     *
+     * @param id the ID of the product
+     * @return the product with the specified ID
+     */
     @Override
     public Product getProductById(Long id) {
         FakeStoreDto fakeStoreDto = restTemplate.getForObject(
@@ -32,6 +45,11 @@ public class FakeStoreProductService implements ProductService {
         return convertFakeStoreProductDtoToProduct(fakeStoreDto);
     }
 
+    /**
+     * Retrieves all products from the FakeStore API.
+     *
+     * @return a list of all products
+     */
     @Override
     public List<Product> getAllProducts() {
         FakeStoreDto[] fakeStoreDtos = restTemplate.getForObject(
@@ -45,6 +63,13 @@ public class FakeStoreProductService implements ProductService {
         return productList;
     }
 
+    /**
+     * Updates a product by its ID in the FakeStore API.
+     *
+     * @param id the ID of the product to update
+     * @param product the updated product details
+     * @return the updated product
+     */
     @Override
     public Product updateProduct(Long id, Product product) {
         FakeStoreDto fakeStoreDto = new FakeStoreDto();
@@ -62,6 +87,12 @@ public class FakeStoreProductService implements ProductService {
         return convertFakeStoreProductDtoToProduct(fakeStoreDto1);
     }
 
+    /**
+     * Converts a FakeStoreDto to a Product.
+     *
+     * @param fakeStoreDto the FakeStoreDto to convert
+     * @return the converted Product
+     */
     private Product convertFakeStoreProductDtoToProduct(FakeStoreDto fakeStoreDto) {
         if (fakeStoreDto == null) {
             return null;

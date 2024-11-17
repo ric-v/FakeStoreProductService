@@ -53,3 +53,65 @@ The application will start on `http://localhost:8080`.
     }
   }
   ```
+
+### Get All Products
+
+- **URL:** `/products/`
+- **Method:** `GET`
+- **Description:** Retrieves all products.
+- **Response:**
+  ```json
+  [
+    {
+      "id": 1,
+      "title": "Product Title",
+      "description": "Product Description",
+      "price": 29.99,
+      "category": {
+        "id": 123,
+        "title": "Category Title"
+      }
+    },
+    {
+      "id": 2,
+      "title": "Another Product Title",
+      "description": "Another Product Description",
+      "price": 39.99,
+      "category": {
+        "id": 124,
+        "title": "Another Category Title"
+      }
+    }
+  ]
+  ```
+
+### Update Product
+
+- **URL:** `/products/{id}`
+- **Method:** `PUT`
+- **Description:** Updates product details by product ID.
+- **Request Body:**
+  ```json
+  {
+    "title": "Updated Product Title",
+    "description": "Updated Product Description",
+    "price": 49.99,
+    "category": {
+      "id": 123,
+      "title": "Updated Category Title"
+    }
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "id": 1,
+    "title": "Updated Product Title",
+    "description": "Updated Product Description",
+    "price": 49.99,
+    "category": {
+      "id": 123,
+      "title": "Updated Category Title"
+    }
+  }
+  ```

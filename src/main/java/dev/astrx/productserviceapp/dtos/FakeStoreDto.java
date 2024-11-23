@@ -4,7 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Data Transfer Object (DTO) for representing product information from the FakeStore API.
+ * Data Transfer Object (DTO) for representing product information from the
+ * FakeStore API.
  */
 @Getter
 @Setter

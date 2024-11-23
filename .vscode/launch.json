@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ProductServiceAppApplication<ProductServiceApp>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "dev.astrx.productserviceapp.ProductServiceAppApplication",
+            "projectName": "ProductServiceApp",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Service class for interacting with the FakeStore API to fetch and update product details.
+ * Service class for interacting with the FakeStore API to fetch and update
+ * product details.
  */
 @Service
 public class FakeStoreProductService implements ProductService {
@@ -40,8 +41,7 @@ public class FakeStoreProductService implements ProductService {
     @Override
     public Product getProductById(Long id) {
         FakeStoreDto fakeStoreDto = restTemplate.getForObject(
-                "https://fakestoreapi.com/products/" + id, FakeStoreDto.class
-        );
+                "https://fakestoreapi.com/products/" + id, FakeStoreDto.class);
         return convertFakeStoreProductDtoToProduct(fakeStoreDto);
     }
 
@@ -53,8 +53,7 @@ public class FakeStoreProductService implements ProductService {
     @Override
     public List<Product> getAllProducts() {
         FakeStoreDto[] fakeStoreDtos = restTemplate.getForObject(
-                "https://fakestoreapi.com/products", FakeStoreDto[].class
-        );
+                "https://fakestoreapi.com/products", FakeStoreDto[].class);
         List<Product> productList = new ArrayList<>();
         assert fakeStoreDtos != null;
         for (FakeStoreDto fakeStoreDto : fakeStoreDtos) {
@@ -66,7 +65,7 @@ public class FakeStoreProductService implements ProductService {
     /**
      * Updates a product by its ID in the FakeStore API.
      *
-     * @param id the ID of the product to update
+     * @param id      the ID of the product to update
      * @param product the updated product details
      * @return the updated product
      */
@@ -80,7 +79,8 @@ public class FakeStoreProductService implements ProductService {
         fakeStoreDto.setCategory(product.getCategory().getTitle());
 
         RequestCallback requestCallback = restTemplate.httpEntityCallback(fakeStoreDto, FakeStoreDto.class);
-        ResponseExtractor<ResponseEntity<FakeStoreDto>> responseExtractor = restTemplate.responseEntityExtractor(FakeStoreDto.class);
+        ResponseExtractor<ResponseEntity<FakeStoreDto>> responseExtractor = restTemplate
+                .responseEntityExtractor(FakeStoreDto.class);
 
         FakeStoreDto fakeStoreDto1 = Objects.requireNonNull(restTemplate.execute(
                 "https://fakestoreapi.com/products/" + id,

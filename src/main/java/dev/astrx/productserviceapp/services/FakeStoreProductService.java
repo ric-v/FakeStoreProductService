@@ -1,6 +1,7 @@
 package dev.astrx.productserviceapp.services;
 
 import dev.astrx.productserviceapp.dtos.FakeStoreDto;
+import dev.astrx.productserviceapp.exceptions.ProductNotCoveredException;
 import dev.astrx.productserviceapp.models.Category;
 import dev.astrx.productserviceapp.models.Product;
 import org.springframework.http.HttpMethod;
@@ -13,6 +14,8 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import javax.management.InstanceNotFoundException;
 
 /**
  * Service class for interacting with the FakeStore API to fetch and update
@@ -37,11 +40,15 @@ public class FakeStoreProductService implements ProductService {
      *
      * @param id the ID of the product
      * @return the product with the specified ID
+     * @throws ProductNotCoveredException
      */
     @Override
-    public Product getProductById(Long id) {
+    public Product getProductById(Long id) throws ProductNotCoveredException {
         FakeStoreDto fakeStoreDto = restTemplate.getForObject(
                 "https://fakestoreapi.com/products/" + id, FakeStoreDto.class);
+        if (fakeStoreDto == null) {
+            throw new ProductNotCoveredException(100L, "Product with ID " + id + " not found");
+        }
         return convertFakeStoreProductDtoToProduct(fakeStoreDto);
     }
 
@@ -50,6 +57,7 @@ public class FakeStoreProductService implements ProductService {
      *
      * @return a list of all products
      */
+    @SuppressWarnings("null")
     @Override
     public List<Product> getAllProducts() {
         FakeStoreDto[] fakeStoreDtos = restTemplate.getForObject(

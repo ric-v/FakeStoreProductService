@@ -1,5 +1,6 @@
 package dev.astrx.productserviceapp.services;
 
+import dev.astrx.productserviceapp.exceptions.ProductNotCoveredException;
 import dev.astrx.productserviceapp.models.Product;
 
 import java.util.List;
@@ -14,8 +15,9 @@ public interface ProductService {
      *
      * @param id the ID of the product
      * @return the product with the specified ID
+     * @throws ProductNotCoveredException
      */
-    Product getProductById(Long id);
+    Product getProductById(Long id) throws ProductNotCoveredException;
 
     /**
      * Retrieves all products.
@@ -29,7 +31,7 @@ public interface ProductService {
      *
      * @param id      the ID of the product to update
      * @param product the updated product details
-     * @return the updated product
+     * @return the updated productw
      */
     Product updateProduct(Long id, Product product);
 }

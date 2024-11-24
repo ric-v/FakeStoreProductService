@@ -1,10 +1,17 @@
 package dev.astrx.productserviceapp.controllers;
 
+import dev.astrx.productserviceapp.dtos.ProductNotCoveredExceptionDto;
+import dev.astrx.productserviceapp.exceptions.ProductNotCoveredException;
 import dev.astrx.productserviceapp.models.Product;
 import dev.astrx.productserviceapp.services.ProductService;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import javax.management.InstanceNotFoundException;
 
 /**
  * Controller class for handling product-related API requests.
@@ -26,8 +33,10 @@ public class ProductController {
      * @return the product with the specified ID
      */
     @GetMapping("/{id}")
-    public Product getProductById(@PathVariable("id") Long id) {
-        return productService.getProductById(id);
+    public ResponseEntity<Product> getProductById(@PathVariable("id") Long id) throws ProductNotCoveredException {
+        Product product;
+        product = productService.getProductById(id);
+        return new ResponseEntity<Product>(product, HttpStatus.OK);
     }
 
     /**
@@ -48,7 +57,23 @@ public class ProductController {
      * @return the updated product
      */
     @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable("id") Long id, @RequestBody Product product) {
+    public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
         return productService.updateProduct(id, product);
+    }
+
+    /**
+     * Handles ProductNotCoveredException and returns a response entity with a
+     * NOT_FOUND status.
+     *
+     * @param e the ProductNotCoveredException thrown when an instance is not found
+     * @return a ResponseEntity containing the exception message and a NOT_FOUND
+     *         status
+     */
+    @ExceptionHandler(ProductNotCoveredException.class)
+    public ResponseEntity<ProductNotCoveredExceptionDto> handleInstanceNotFoundException(ProductNotCoveredException e) {
+        ProductNotCoveredExceptionDto dto = new ProductNotCoveredExceptionDto();
+        dto.setErrorCode(e.getId());
+        dto.setMessage(e.getMessage());
+        return new ResponseEntity<>(dto, HttpStatus.NOT_FOUND);
     }
 }

@@ -1,5 +1,6 @@
 package dev.astrx.productserviceapp.models;
 
+import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +9,6 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class Category {
-    Long id;
-    String title;
+@Entity
+public class Category extends BaseModel {
 }

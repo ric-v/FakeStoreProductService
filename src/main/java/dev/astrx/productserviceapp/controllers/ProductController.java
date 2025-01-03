@@ -5,6 +5,7 @@ import dev.astrx.productserviceapp.exceptions.ProductNotCoveredException;
 import dev.astrx.productserviceapp.models.Product;
 import dev.astrx.productserviceapp.services.ProductService;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class ProductController {
 
     ProductService productService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(@Qualifier("SelfProductService") ProductService productService) {
         this.productService = productService;
     }
 
@@ -59,6 +60,11 @@ public class ProductController {
     @PutMapping("/{id}")
     public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
         return productService.updateProduct(id, product);
+    }
+
+    @PostMapping
+    public Product createProduct(@RequestBody Product product) {
+        return productService.createProduct(product);
     }
 
     /**

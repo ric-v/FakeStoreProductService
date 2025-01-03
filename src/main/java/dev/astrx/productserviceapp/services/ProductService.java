@@ -34,4 +34,12 @@ public interface ProductService {
      * @return the updated productw
      */
     Product updateProduct(Long id, Product product);
+
+    /**
+     * Creates a new product.
+     *
+     * @param product the product to create
+     * @return the created product
+     */
+    Product createProduct(Product product);
 }

@@ -35,6 +35,10 @@ public class FakeStoreProductService implements ProductService {
         this.restTemplate = restTemplate;
     }
 
+    public Product createProduct(Product product) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
     /**
      * Retrieves a product by its ID from the FakeStore API.
      *

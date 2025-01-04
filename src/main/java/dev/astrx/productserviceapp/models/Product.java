@@ -15,5 +15,6 @@ public class Product extends BaseModel {
     String description;
     Double price;
     @ManyToOne
+    // @JoinColumn
     Category category;
 }

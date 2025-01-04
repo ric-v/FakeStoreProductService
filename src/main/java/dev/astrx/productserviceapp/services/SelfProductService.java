@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import dev.astrx.productserviceapp.exceptions.ProductNotCoveredException;
 import dev.astrx.productserviceapp.models.Category;
 import dev.astrx.productserviceapp.models.Product;
+import dev.astrx.productserviceapp.projections.ProductTitleAndDescription;
 import dev.astrx.productserviceapp.repos.CategoryRepo;
 import dev.astrx.productserviceapp.repos.ProductRepo;
 
@@ -25,8 +26,15 @@ public class SelfProductService implements ProductService {
     @Override
     public Product getProductById(Long id) throws ProductNotCoveredException {
         System.out.println(id);
+
+        ProductTitleAndDescription productTitleAndDescription = productRepo.getProductTitleAndDesc(id);
+        System.out.println(
+                "Projection: title - " + productTitleAndDescription.getTitle() + " description - "
+                        + productTitleAndDescription.getDescription());
+        // return productRepo.getProductTitleAndDesc(id);
+
         return productRepo.findById(id)
-                .orElseThrow(() -> new ProductNotCoveredException(id, "Product not found with id: " + id));
+                .orElseThrow(() -> new ProductNotCoveredException(id, "Product not found withid: " + id));
     }
 
     @Override

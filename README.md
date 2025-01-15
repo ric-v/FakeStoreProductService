@@ -115,3 +115,52 @@ The application will start on `http://localhost:8080`.
     }
   }
   ```
+
+### Create Product
+
+- **URL:** `/products`
+- **Method:** `POST`
+- **Description:** Creates a new product.
+- **Request Body:**
+  ```json
+  {
+    "title": "New Product Title",
+    "description": "New Product Description",
+    "price": 59.99,
+    "category": {
+      "id": 125,
+      "title": "New Category Title"
+    }
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "id": 3,
+    "title": "New Product Title",
+    "description": "New Product Description",
+    "price": 59.99,
+    "category": {
+      "id": 125,
+      "title": "New Category Title"
+    }
+  }
+  ```
+
+### Token Validation
+
+- **URL:** `/users/validate/{token}`
+- **Method:** `GET`
+- **Description:** Validates a token and retrieves user details.
+- **Response:**
+  ```json
+  {
+    "name": "User Name",
+    "email": "user@example.com",
+    "role": [
+      {
+        "value": "ROLE_USER"
+      }
+    ]
+  }
+  ```

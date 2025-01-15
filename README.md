@@ -10,6 +10,7 @@ FakeStoreProductService is a Spring Boot application that interacts with the Fak
 
 - Java 17 or higher
 - Maven 3.6.3 or higher
+- Download and setup OAuth service for user management - https://github.com/ric-v/UserServiceApp
 
 ### Steps
 
@@ -151,7 +152,7 @@ The application will start on `http://localhost:8080`.
 
 - **URL:** `/users/validate/{token}`
 - **Method:** `GET`
-- **Description:** Validates a token and retrieves user details.
+- **Description:** Validates a token and retrieves user details. Use the OAuth server provided from https://github.com/ric-v/UserServiceApp
 - **Response:**
   ```json
   {
